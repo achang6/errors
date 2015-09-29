@@ -3,43 +3,61 @@
 # This script raises an error based on 
 # user-supplied command line argument
 
-import sys
+import sys, os, argparse
 
-def print_usage():
-    """Print usage and exit"""
-    sys.stderr.write("usage: python raise_err.py <error type>\n")
-    sys.stderr.write("available errors: \n")
-    sys.stderr.write("\tassertion, io, import, index\n")
-    sys.stderr.write("\tkey, name, os, type, value,\n")
-    sys.stderr.write("\tzerodivision\n")
-    sys.exit()
-
-# Check args
-if len(sys.argv) != 2:
-    print_usage()
-
-error_type = sys.argv[1]
+parser = argparse.ArgumentParser()
+parser.add_argument('error_type')
+args = parser.parse_args()
+error_type = args.error_type
 
 if error_type == "assertion":
-    raise AssertionError
+    monkey = True
+    if monkey:
+        bananasInStock = False
+    assert bananasInStock
 elif error_type == "io":
-    raise IOError
+    fish_scaled = True
+    head_decapitated = True
+    disembowel = open('Pictures/Fish_Belly/Bisected_Fish.gif')
 elif error_type == "import":
-    raise ImportError
+    import wild_cats_gone_wild
 elif error_type == "index":
-    raise IndexError
+    dungeon_doors = range(1,100,2)
+    hidden_boss_door = 101
+    print(dungeon_doors[hidden_boss_door])
 elif error_type == "key":
-    raise KeyError
+    mortal_enemies = {'worst': 'time',
+            'worse': 'work',
+            'bad'  : 'laws of physics',
+            'not-so-bad': 'the sun'
+            }
+    print(mortal_enemies['alright'])
 elif error_type == "name":
-    raise NameError
+    def appettite_inducing_ray_gun():
+        print(hungry)
+
+    print('Are you hungry?')
+    appettite_inducing_ray_gun()
+
 elif error_type == "os":
-    raise OSError
+    fishtank = range(0,10,1)
+    for fishinMate in fishtank:
+        print(fishinMate, os.ttyname(fishinMate))
+
 elif error_type == "type":
-    raise TypeError
+    print('Hello There')
+    print('1 +' + 1 + ' does not equal 2')
+
 elif error_type == "value":
-    raise ValueError
+    monkey = 'z'
+    print(str(int(monkey)+1))
 elif error_type == "zerodivision":
-    raise ZeroDivisionError
+    andyPythonProjectProgress = 0
+    timeToWorkOnProject = 0
+    dailyWorkAllocation = (1 - andyPythonProjectProgress) / timeToWorkOnProject
+
+    print('Andy Q.Q')
+
 else:
     sys.stderr.write("Sorry, not able to throw a(n) ")
     sys.stderr.write(error_type + " error\n")
